@@ -1,0 +1,58 @@
+//  Copyright 2012 conversionworks.org
+//
+//  Master Branches
+//    iOS code: https://github.com/drawbridge/CWorks
+//
+//  Contributors:
+//      https://github.com/anupamtulsyan (initiator & iOS code)
+
+Synopsis: an open source project to provide a conversion tracking 
+          solution for iOS without the use of Unique Device Identifier (UDID)
+
+Usage:
+ #include "CWorks.h"
+  
+  //record click
+  [CWorks recordClick:@"testapp" forAdNetwork:@"drawbridge" uniqueId:@"testid"];
+  
+  //record Impression
+  [CWorks recordImpression:@"testapp" forAdNetwork:@"drawbridge" uniqueId:@"testid"];
+
+  //get list of clicks. All clicks for this app are deleted once accessed.
+  NSDictionary * dict = [CWorks getClicks:@"testapp"];
+
+  //get list of Impressions. All impressions for this app are deleted once accessed.
+  NSDictionary * dict = [CWorks getImpressions:@"testapp"];
+
+  Check for nil dictionary objects when getting the records. Data returned by get functions is in the following
+  format,
+  
+  type.networkName.uniqueId  ==> timestamp (UTC in milliseconds)
+  
+  where type is the either "i" for impression or "c" for click. network name and unique id is the same as 
+  passed by the ad network.
+  
+  
+  Default number of impressions or clicks stored in the pasteboard for a given app is 50. Please change
+  the parameter kMaxPasteBoardItems present in CWorks.m to suitable number for your implementation if needed.
+  
+  
+Context:
+
+Conversion tracking is a crucial component of any performance based advertising solution. Mobile ad networks, supply and demand 
+side platforms have traditionally adopted a conversion tracking approach based on the UDID on iOS. With Apple recently taking a 
+position against the use of the UDID and deprecating access to the same, there is a need for an innovative, privacy friendly solution. 
+
+Additionally developers who use multiple channels for advertising and solving their user acquisition needs, stand to benefit tremendously 
+from a transparent, open and privacy friendly standard for conversion tracking. This open source initiative addresses a real need in the 
+ecosystem around a fair standard for attributing conversions to the rightful driver, obviating duplicate claims. 
+
+As proprietary solutions around device identification emerge it could lead to fragmentation and hence creating challenges for a unified 
+conversion tracking solution. This project is an open source initiative to solve this problem for many developers and continue to make it 
+a thriving and efficient ecosystem. 
+
+
+Credits: 
+
+Yann Lechelle, OpenUDID project and many other developers for laying the seeds of creative solutions for this problem. 
+
